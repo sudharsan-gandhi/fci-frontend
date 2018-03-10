@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { PouchDbService } from './services/pouch-db.service';
 
 
 @NgModule({
@@ -12,7 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [PouchDbService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

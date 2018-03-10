@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-const PouchDB = require( 'pouchdb' );
+const PouchDB = require( 'pouchdb' ).default;
 
 @Injectable()
 export class PouchDbService {
@@ -11,6 +11,7 @@ export class PouchDbService {
     if ( !this.isInstantiated ) {
       this.database = new PouchDB('fci');
       this.isInstantiated = true;
+      console.log ('offline db created and current adapter used is:', this.database.adapter );
    }
   }
   public fetch() {
