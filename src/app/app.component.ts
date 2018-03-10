@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
   }
-  constructor ( private db: PouchDbService, private zone: NgZone ){
+  constructor ( private db: PouchDbService, private zone: NgZone ) {
 
   }
 }
