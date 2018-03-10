@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+declare var require: any;
 const PouchDB = require( 'pouchdb' ).default;
 
 @Injectable()
