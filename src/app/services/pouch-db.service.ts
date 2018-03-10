@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { UUID } from 'angular2-uuid';
 declare var require: any;
 const PouchDB = require( 'pouchdb' ).default;
 
@@ -37,6 +38,10 @@ public put(id: string, document: any) {
             });
         }
     });
+}
+public push (document: any) {
+  document._id = UUID.UUID();
+  return this.database.put(document);
 }
 
 // public sync(remote: string) {
