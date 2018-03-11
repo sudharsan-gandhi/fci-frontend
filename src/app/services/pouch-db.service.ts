@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { UUID } from 'angular2-uuid';
 declare var require: any;
-const PouchDB = require('pouchdb').default;
+const PouchDB = require( 'pouchdb' ).default;
 
 @Injectable()
 export class PouchDbService {
@@ -87,3 +88,28 @@ export class PouchDbService {
     }
 
 }
+
+    });
+}
+public push (document: any) {
+  document._id = UUID.UUID();
+  return this.database.put(document);
+}
+
+// public sync(remote: string) {
+//     let remoteDatabase = new PouchDB(remote);
+//     this.database.sync(remoteDatabase, {
+//         live: true
+//     }).on('change', change => {
+//         this.listener.emit(change);
+//     }).on('error', error => {
+//         console.error(JSON.stringify(error));
+//     });
+// }
+
+public getChangeListener() {
+    return this.listener;
+}
+
+}
+

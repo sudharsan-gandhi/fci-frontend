@@ -12,15 +12,16 @@ import { SignupService } from './services/signup.service';
 // component imports
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RoutingModule } from './routing.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     SignupComponent,
     LoginComponent,
     DashboardComponent
@@ -32,7 +33,6 @@ import { SignupComponent } from './components/signup/signup.component';
     HttpModule,
     RoutingModule,
     MDBBootstrapModule.forRoot()
-
   ],
   providers: [PouchDbService, SignupService],
   bootstrap: [AppComponent],

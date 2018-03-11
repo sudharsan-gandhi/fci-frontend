@@ -9,8 +9,8 @@ import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 export class AppComponent implements OnInit {
 
   isDashBoard: boolean = false;
-
-  constructor(private route: ActivatedRoute, private router: Router) {
+  ngOnInit() {}
+  constructor(private route: ActivatedRoute, private router: Router,private db: PouchDbService {
     this.router.events.subscribe((path: NavigationStart) => {
       if (path instanceof NavigationStart && path.url.startsWith("/dashboard") ) {
         console.log("started navigation in dashboard");
@@ -20,10 +20,5 @@ export class AppComponent implements OnInit {
         console.log("not in dashboard");
         this.isDashBoard = false;
       } });
-  }
-
-  ngOnInit() {
-
-
   }
 }
