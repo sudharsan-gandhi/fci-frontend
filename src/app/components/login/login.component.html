@@ -1,16 +1,31 @@
-<div class="container jumbotron justify-content-md-center alert-success">
-  <form class="row">
-    <div class="offset-1 col-4">
-      <input type="text" name="login_email" id="login_email" placeholder="email address" class="form-control">
+
+<ul class="nav nav-pills justify-content-md-center">
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/signup">Sign Up</a>
+  </li>
+</ul>
+
+<br>
+
+
+<div class="container justify-content-md-center">
+  <form class="col-8">
+    <div class="form-group">
+      <input type="text" name="login_email" class="form-control" id="login_email" placeholder="email address" class="form-control">
     </div>
-    <div class="col-4">
-      <input type="password" name="login_password" id="login_password" class="form-control" placeholder="password">
+    <div class="form-group">
+      <input type="password" name="login_password" class="form-control" id="login_password" class="form-control" placeholder="password">
     </div>
-    <div class='col-3'>
-      <button type="submit" class="btn btn-dark">Login</button>
+    <div class='form-group'>
+      <button type="submit" class="form-control" class="btn btn-primary">Login</button>
     </div>
   </form>
 </div>
+
+<!--
 <h2 class='heading text-center'>Register</h2>
   <hr>
 <div class='container alert-secondary'>
@@ -39,3 +54,4 @@
   </form>
   <br><br>
 </div>
+-->

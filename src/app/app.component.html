@@ -1,5 +1,11 @@
 <!-- <h2>...working...check console for pouch outputs</h2> -->
 
 <!-- <app-test></app-test> -->
+<div *ngIf="!isDashBoard">
+<br>
+<h2 class="header text-center">Food Depot Control</h2>
+<hr>
+</div>
 
-<app-signup></app-signup>
+
+<router-outlet></router-outlet>
