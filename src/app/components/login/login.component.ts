@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   onRegister ( user: User ) {
     console.log(user);
-    this.db.push(user).then(function(doc){
+    this.db.push(user).then(function(doc) {
       console.log(doc.id);
     });
   }
