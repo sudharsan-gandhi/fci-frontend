@@ -5,12 +5,6 @@ import { PouchDbService } from './services/pouch-db.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'app';
-  ngOnInit() {
-
-  }
-  constructor ( private db: PouchDbService, private zone: NgZone ){
-
-  }
+export class AppComponent  {
+  constructor() {}
 }
