@@ -22,6 +22,6 @@ export class LoginComponent implements OnInit {
 
   login ( user ) {
     console.log(user);
-    this.db.login(user).subscribe(data => this.route.navigateByUrl('dashboard'), error => console.error(error));
+    this.db.login(user).subscribe(data => this.route.navigateByUrl('dashboard'), error => this.route.navigateByUrl('/signup'));
   }
 }
