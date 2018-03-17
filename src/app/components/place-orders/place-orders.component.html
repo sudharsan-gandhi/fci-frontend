@@ -1,0 +1,38 @@
+
+
+<div class="container align-items-center">
+  <div class="alert alert-primary" role="alert">
+    Please fill the Sign Up form
+  </div>
+  <form class="col-8" [formGroup]="signupForm" (ngSubmit)='signup(signupForm.value)'>
+    <div class="form-group">
+      <label for="inputEmail">Email address</label>
+      <input type="email" name="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="inputFirstName">First Name</label>
+      <input type="text" name="first_name" formControlName="first_name" class="form-control" id="first_name" placeholder="first name">
+    </div>
+    <div class="form-group">
+      <label for="inputMiddleName">Middle Name</label>
+      <input type="text" name="middle_name" formControlName="middle_name" class="form-control" id="middle_name" placeholder="middle name">
+    </div>
+    <div class="form-group">
+      <label for="inputLastName">Last Name</label>
+      <input type="text" name="last_name" formControlName="last_name" class="form-control" id="last_name" placeholder="last name">
+    </div>
+
+    <div class="form-group">
+      <label for="inputPasword">Password</label>
+      <input type="password" name="password" formControlName="password" class="form-control" id="password" placeholder="Password">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" >Sign up</button>
+  </form>
+<!-- ([attr.disabled])="!signupForm.valid" -->
+
+
+</div>
+

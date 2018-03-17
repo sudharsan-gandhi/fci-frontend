@@ -14,6 +14,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
+import { PlaceOrdersComponent } from './components/place-orders/place-orders.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RoutingModule } from './routing.module';
     AppComponent,
     SignupComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    PlaceOrdersComponent
   ],
   imports: [
     BrowserModule,
