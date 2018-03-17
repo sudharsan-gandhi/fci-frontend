@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../../model/user.interface';
 import { PouchDbService } from '../../services/pouch-db.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,23 +10,18 @@ import { PouchDbService } from '../../services/pouch-db.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public registerForm: FormGroup;
-  constructor(private reg_form: FormBuilder, private db: PouchDbService, private zone: NgZone) { }
+  public loginForm: FormGroup;
+  constructor(private reg_form: FormBuilder, private db: PouchDbService, private zone: NgZone, private route: Router) { }
 
   ngOnInit() {
-    this.registerForm = new FormGroup ({
-      first_name: new FormControl('', [Validators.required]),
-      last_name: new FormControl('', [Validators.required]),
-      middle_name: new FormControl('', [Validators.required]),
+    this.loginForm = new FormGroup ({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
 
-  onRegister ( user: User ) {
+  login ( user ) {
     console.log(user);
-    this.db.push(user).then(function(doc) {
-      console.log(doc.id);
-    });
+    this.db.login(user).subscribe(data => this.route.navigateByUrl('dashboard'), error => console.error(error));
   }
 }

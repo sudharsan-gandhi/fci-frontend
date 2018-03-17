@@ -4,5 +4,5 @@ export interface User {
   middle_name?: string;
   email: string;
   password: string;
-
+  type: 'user';
 }

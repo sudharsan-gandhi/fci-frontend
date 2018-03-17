@@ -1,7 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UUID } from 'angular2-uuid';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { map } from 'rxjs/operators/map';
+
 declare var require: any;
 const PouchDB = require( 'pouchdb' ).default;
+const CouchDb = 'http://localhost:8080/';
 
 @Injectable()
 export class PouchDbService {
@@ -9,7 +13,8 @@ export class PouchDbService {
   private database: any;
   private listener: EventEmitter<any> = new EventEmitter();
   private remoteCouch = 'http://localhost:5984/fcitest';
-  constructor() {
+
+  constructor(private http: Http) {
       if (!this.isInstantiated) {
           this.database = new PouchDB('fcitest');
           this.isInstantiated = true;
@@ -97,6 +102,20 @@ export class PouchDbService {
   public getChangeListener() {
       return this.listener;
   }
+////////////////////////////////////////user code/////////////////////////////////////////////////
+  // user signup
+  public userSignup(user) {
+    user.type = 'user';
+    const url = CouchDb + 'signup';
+    return this.http.post(url, user);
+  }
 
+  public login(user) {
+    const url = CouchDb + 'login';
+    return this.http.post(url, user);
+
+  }
+
+/////////////////////////////////////////end user code//////////////////////////////////////////////
 }
 
