@@ -5,7 +5,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 // service imports
 import { PouchDbService } from './services/pouch-db.service';
-import { SignupService } from './services/signup.service';
 
 // component imports
 import { AppComponent } from './app.component';
@@ -32,7 +31,7 @@ import { RoutingModule } from './routing.module';
     RoutingModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [PouchDbService, SignupService],
+  providers: [PouchDbService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
