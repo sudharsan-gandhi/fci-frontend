@@ -8,26 +8,26 @@ import { PlaceOrdersComponent } from './components/place-orders/place-orders.com
 
 const routes: Routes = [
     {
-        path: 'login',
-        component: LoginComponent,
-    },
-    {
-        path: 'signup',
-        component: SignupComponent,
-    },
-    {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent,
-        children: [
-          {
-            path: 'place-orders',
-            component: PlaceOrdersComponent
-          }
+        children:[
+            {
+                path: 'login',
+                component: LoginComponent,
+            },
+            {
+                path: 'signup',
+                component: SignupComponent,
+            }
         ]
     },
     {
+        path: 'miller/dashboard',
+        loadChildren: 'app/miller/miller.module#MillerModule'
+    },
+    {
       path: '**',
-      component : LoginComponent
+      redirectTo: 'login',
     }
 ];
 
