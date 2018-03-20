@@ -20,7 +20,7 @@
     <div class="form-group">
       <label for="inputEmail">Email address</label>
       <input type="email" name="email" formControlName="email" class="form-control " id="email" aria-describedby="emailHelp" placeholder="Enter email">
-      <div  *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['first_name'].dirty" signup class="alert-danger">
+      <div  *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].dirty" signup class="alert-danger">
         Please enter your email id..!
       </div>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -47,7 +47,7 @@
       <input type="text" name="last_name" formControlName="last_name" class="form-control" id="last_name" placeholder="last name">
       <div *ngIf="signupForm.controls['last_name'].hasError('required') && signupForm.controls['last_name'].dirty" class="alert-danger">
           Last Name should not be empty....
-        </div>
+      </div>
     </div>
 
     <div class="form-group">
@@ -70,7 +70,5 @@
 
     <button type="submit" [disabled]="!signupForm.valid" class="btn btn-primary" >Sign up</button>
   </form>
-<!-- ([attr.disabled])="!signupForm.valid" -->
-
 
 </div>
