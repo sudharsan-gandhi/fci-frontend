@@ -5,18 +5,18 @@ import { map } from 'rxjs/operators/map';
 
 declare var require: any;
 const PouchDB = require( 'pouchdb' ).default;
-const CouchDb = 'http://localhost:8080/';
+const CouchDb = 'http://localhost:8000/';
 
 @Injectable()
 export class PouchDbService {
   private isInstantiated: boolean;
   private database: any;
   private listener: EventEmitter<any> = new EventEmitter();
-  private remoteCouch = 'http://localhost:5984/fcitest';
+  private remoteCouch = 'http://localhost:5984/fci';
 
   constructor(private http: Http) {
       if (!this.isInstantiated) {
-          this.database = new PouchDB('fcitest');
+          this.database = new PouchDB('fci');
           this.isInstantiated = true;
           console.log('offline db created and current adapter used is:', this.database.adapter);
       }
