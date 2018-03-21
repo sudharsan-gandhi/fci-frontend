@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PlaceOrderComponent } from './place-order/place-order.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ViewRequestComponent } from './view-request/view-request.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     SharedModule,
     MDBBootstrapModule.forRoot()
   ],
-  declarations: [DashboardComponent, PlaceOrderComponent],
+  declarations: [DashboardComponent, PlaceOrderComponent, ViewRequestComponent],
   providers: [MillerService],
   schemas: [NO_ERRORS_SCHEMA]
 })
