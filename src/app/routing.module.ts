@@ -22,13 +22,13 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'miller/dashboard',
+        path: 'miller',
         loadChildren: 'app/miller/miller.module#MillerModule'
-    },
-    {
-      path: '**',
-      redirectTo: 'login',
     }
+    // {
+    //   path: '**',
+    //   redirectTo: 'login',
+    // }
 ];
 
 @NgModule({
