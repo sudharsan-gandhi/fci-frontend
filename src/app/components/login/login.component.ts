@@ -27,10 +27,9 @@ export class LoginComponent implements OnInit {
     this.progressBar.show();
     this.db.login(user).subscribe(data => {
 
-      setTimeout(() => {
-        this.progressBar.hide();
-        this.route.navigateByUrl('miller/dashboard');
-      }, 4000);
+      this.progressBar.hide();
+      this.route.navigateByUrl('miller/dashboard');
+
 
     }, error => {
       this.progressBar.hide();
