@@ -13,7 +13,8 @@ import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.com
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  constructor(private reg_form: FormBuilder, private db: PouchDbService, private progressBar: ProgressBarService, private zone: NgZone, private route: Router) { }
+  constructor(private reg_form: FormBuilder, private db: PouchDbService,
+            private progressBar: ProgressBarService, private zone: NgZone, private route: Router) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
 
     }, error => {
       this.progressBar.hide();
-      this.route.navigateByUrl('/signup')
+      this.route.navigateByUrl('/signup');
     }
     );
   }
