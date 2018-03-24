@@ -22,6 +22,10 @@ const routes: Routes = [
         component: ConsumerRequestsComponent
       },
       {
+        path: 'miller-requests',
+        component: MillerRequestsComponent
+      },
+      {
         path: 'dashboard',
         component: MillerRequestsComponent
       },
