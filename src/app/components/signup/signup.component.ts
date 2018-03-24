@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
-  patternMatch: '(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
   constructor(private db: PouchDbService, private route: Router) { }
 
   ngOnInit() {
@@ -22,7 +21,7 @@ export class SignupComponent implements OnInit {
       last_name: new FormControl(null, [Validators.required]),
       middle_name: new FormControl(null, []),
       email: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required, Validators.pattern('^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*[\W]).*$')]),
+      password: new FormControl(null, [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}')]),
     });
   }
 
