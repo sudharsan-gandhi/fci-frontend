@@ -1,3 +1,6 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,6 +18,8 @@ import { ViewRequestComponent } from './view-request/view-request.component';
   imports: [
     CommonModule,
     MillerRoutingModule,
+    ReactiveFormsModule,
+    HttpModule,
     SharedModule,
     MDBBootstrapModule.forRoot()
   ],

@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Injectable, EventEmitter } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -58,6 +59,17 @@ export class PouchDbService {
           return this.database.remove(doc);
       });
   }
+
+//   public deleteAll() {
+//       this.fetch().then(data => {
+//         data.rows.forEach(element => {
+//             this.delete(element.id);
+//             console.log('deleted');
+//         });
+//       }).catch(err => {
+
+//       }) 
+//   }
 
   // public sync(remote: string) {
   //     let remoteDatabase = new PouchDB(remote);
