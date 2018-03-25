@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { PlaceOrdersComponent } from './components/place-orders/place-orders.component';
 
+
 const routes: Routes = [
     {
         path: '',
         component: DashboardComponent,
-        children:[
+        children: [
             {
                 path: 'login',
                 component: LoginComponent,
@@ -22,8 +23,13 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'miller',
-        loadChildren: 'app/miller/miller.module#MillerModule'
+      path: 'miller',
+      loadChildren: 'app/miller/miller.module#MillerModule'
+    },
+
+    {
+      path: 'depot-manager',
+      loadChildren: 'app/depot-manager/depot-manager.module#DepotManagerModule'
     }
     // {
     //   path: '**',

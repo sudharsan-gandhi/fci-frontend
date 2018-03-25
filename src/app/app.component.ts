@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
           this.isDashBoard = false;
         }
       });
-    },3000);
+    }, 3000);
   }
 
 }

@@ -5,49 +5,61 @@
 <br>
 
 
-  <div class="container col-md-6">
-    <!-- Card -->
-    <div class="card  ">
+<div class="container col-md-6">
+  <!-- Card -->
+  <div class="card  ">
 
-      <!-- Card body -->
-      <div class="card-body col-md-11">
-
+    <!-- Card body -->
+    <div class="card-body col-md-11">
         <!-- Material form register -->
-      <form>
+      <form [formGroup]="placeorderForm" (onSubmit)='placeorder(placeorderForm.value)'>
         <p class="h5 text-center mb-4">Place Order</p>
-      
-        <div class="md-form">
-        
-          <input type="text" id="defaultForm-email" class="form-control" mdbActive>
-          <label for="defaultForm-email">Number of Goods</label>
-        </div>
-      
-        <div class="md-form">
-  
-          <input type="text" id="defaultForm-pass" class="form-control" mdbActive>
-          <label for="defaultForm-pass">Type of Commodity</label>
-        </div>
 
         <div class="example-container col-12 ">
           <mat-form-field class="col-12">
-            <mat-select placeholder="Request Type">
-              <mat-option value="option">In</mat-option>
-              <mat-option value="option">Out</mat-option>
+            <mat-select  formControlName="type_of_commodity" name="type_of_commodity"  placeholder="Type of Commodity">
+              <mat-option value="option">Raw-Rice</mat-option>
+              <mat-option value="option">Cotton</mat-option>
+              <mat-option value="option">Wheat</mat-option>
+              <mat-option value="option">Grains</mat-option>
             </mat-select>
             <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
           </mat-form-field>
         </div>
-      
+        <div class="md-form">
+          <input type="text" formControlName="total_weight" name="total_weight"  class="form-control" mdbActive>
+          <label for="defaultForm-email">Total Weight</label>
+        </div>
+
+        <div class="md-form">
+
+          <input type="text"  formControlName="total_number_of_bags" name="total_number_of_bags"  class="form-control" mdbActive>
+          <label for="defaultForm-pass">Total number of bags</label>
+        </div>
+        <div class="example-container col-12 ">
+          <mat-form-field class="col-12">
+            <mat-select placeholder="Mode of Transport"  formControlName="mode_of_transport" name="mode_of_transport">
+              <mat-option value="option">Truck</mat-option>
+              <mat-option value="option">Train</mat-option>
+            </mat-select>
+            <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="md-form">
+
+          <input type="text" formControlName="total_cost" name="total_cost" class="form-control" mdbActive>
+          <label for="defaultForm-email">Total Cost</label>
+        </div>
         <div class="text-center">
-          <button class="btn btn-default waves-light" mdbRippleRadius>Request</button>
+          <button type="Submit" >Request</button>
         </div>
       </form>
-        <!-- Material form register -->
 
-      </div>
-      <!-- Card body -->
+      <!-- Material form register -->
 
     </div>
-    <!-- Card -->
-  </div>
+    <!-- Card body -->
 
+  </div>
+  <!-- Card -->
+</div>

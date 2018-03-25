@@ -17,6 +17,10 @@
 
 <div class="container justify-content-md-center">
   <form class="col-8" [formGroup]="loginForm" (ngSubmit)='login(loginForm.value)'>
+    <div *ngIf="errorMessage" class="alert-danger">
+      {{errorMessage}}
+      <br>
+    </div>
     <div class="form-group">
       <input type="text" name="email" class="form-control" formControlName="email" id="email" placeholder="email address" class="form-control">
     </div>
