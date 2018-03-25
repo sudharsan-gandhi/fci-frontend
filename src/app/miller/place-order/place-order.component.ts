@@ -1,13 +1,10 @@
 import { Router } from '@angular/router';
-import { PouchDbService } from './../../services/pouch-db.service';
-import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Order } from './../../model/order.interface';
 import { PouchDbService } from '../../services/pouch-db.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 // tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-place-order',
