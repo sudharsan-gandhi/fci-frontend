@@ -5,13 +5,12 @@
 <br>
 
 
-  <div class="container col-md-6">
-    <!-- Card -->
-    <div class="card  ">
+<div class="container col-md-6">
+  <!-- Card -->
+  <div class="card  ">
 
-      <!-- Card body -->
-      <div class="card-body col-md-11">
-
+    <!-- Card body -->
+    <div class="card-body col-md-11">
         <!-- Material form register -->
       <form [formGroup]="placeorderForm" (onSubmit)='placeorder(placeorderForm.value)'>
         <p class="h5 text-center mb-4">Place Order</p>
@@ -28,7 +27,6 @@
           </mat-form-field>
         </div>
         <div class="md-form">
-
           <input type="text" formControlName="total_weight" name="total_weight"  class="form-control" mdbActive>
           <label for="defaultForm-email">Total Weight</label>
         </div>
@@ -52,18 +50,16 @@
           <input type="text" formControlName="total_cost" name="total_cost" class="form-control" mdbActive>
           <label for="defaultForm-email">Total Cost</label>
         </div>
-
-
         <div class="text-center">
           <button type="Submit" >Request</button>
         </div>
       </form>
-        <!-- Material form register -->
 
-      </div>
-      <!-- Card body -->
+      <!-- Material form register -->
 
     </div>
-    <!-- Card -->
-  </div>
+    <!-- Card body -->
 
+  </div>
+  <!-- Card -->
+</div>

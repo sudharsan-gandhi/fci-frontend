@@ -13,8 +13,9 @@ import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.com
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  constructor(private reg_form: FormBuilder, private db: PouchDbService,
-            private progressBar: ProgressBarService, private zone: NgZone, private route: Router) { }
+  public errorMessage: String;
+  constructor(private reg_form: FormBuilder,
+    private db: PouchDbService, private progressBar: ProgressBarService, private zone: NgZone, private route: Router) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -26,15 +27,17 @@ export class LoginComponent implements OnInit {
   login(user) {
     console.log(user);
     this.progressBar.show();
-    this.db.login(user).subscribe(data => {
-
+    this.db.login(user).subscribe((data) => {
       this.progressBar.hide();
-      this.route.navigateByUrl('miller/dashboard');
+      const body = data.json();
+      this.route.navigateByUrl(body.path);
 
 
-    }, error => {
+    }, (error) => {
       this.progressBar.hide();
-      this.route.navigateByUrl('/signup');
+      const body = JSON.parse(error._body);
+      this.errorMessage = body.error_msg;
+      this.route.navigateByUrl(body.path);
     }
     );
   }

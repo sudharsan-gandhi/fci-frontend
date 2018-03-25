@@ -26,30 +26,23 @@
   <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th>#</th>
+
         <th>Request Id</th>
-        <th>Request Type</th>
-        <th>Request Date</th>
+        <th>Type of Commodity</th>
+        <th>Number of Bags</th>
+        <th>Total Weight</th>
+        <th>Mode of Transport</th>
+        <th>Total Cost</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>2345345</td>
-        <td>In</td>
-        <td>21-03-2018</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>4564564</td>
-        <td>Out</td>
-        <td>21-03-2018</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>345346</td>
-        <td>Out</td>
-        <td>21-03-2018</td>
+      <tr *ngFor="let doc of docs">
+        <th>{{ doc._id }}</th>
+        <td>{{ doc.type_of_commodity}}</td>
+        <td>{{ doc.total_number_of_bags }}</td>
+        <td>{{ doc.total_weight }}</td>
+        <td>{{ doc.mode_of_transport }}</td>
+        <td>{{ doc.total_cost }}</td>
       </tr>
     </tbody>
   </table>
