@@ -1,28 +1,56 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { element } from 'protractor';
+import { Injectable, EventEmitter, OnInit } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { map } from 'rxjs/operators/map';
+import { FunctionCall } from '@angular/compiler';
 
 declare var require: any;
 const PouchDB = require( 'pouchdb' ).default;
 const CouchDb = 'http://localhost:8000/';
 
 @Injectable()
-export class PouchDbService {
+export class PouchDbService implements OnInit {
   private isInstantiated: boolean;
   private database: any;
   private listener: EventEmitter<any> = new EventEmitter();
   private remoteCouch = 'http://localhost:5984/fci';
+  private datas = [];
+  private syncFlag = true;
 
+  ngOnInit() {
+
+  }
   constructor(private http: Http) {
       if (!this.isInstantiated) {
           this.database = new PouchDB('fci');
           this.isInstantiated = true;
           console.log('offline db created and current adapter used is:', this.database.adapter);
       }
+      this.database.changes({
+        since: 'now',
+        live: true,
+        include_docs: true
+      }).on('change', function() {
+        this.startSync();
+      }).on('error', function() {
+        this.stopSync();
+      });
+      document.addEventListener('online',  this.startSync);
+      document.addEventListener('offline', this.stopSync);
   }
   public fetch() {
       return this.database.allDocs({ include_docs: true, descending: true });
+  }
+  public startSync() {
+    console.log('you are online');
+    this.datas = this.fetch();
+    console.log(this.datas);
+    this.syncOneByOne();
+  }
+  public stopSync() {
+    console.log('you are offline');
+    this.syncFlag = false;
   }
 
   public get(id: string) {
@@ -52,12 +80,22 @@ export class PouchDbService {
           console.log( 'error in pushing', err);
       });
   }
-
   public delete(id: string) {
       this.database.get(id).then(function (doc) {
           return this.database.remove(doc);
       });
   }
+
+//   public deleteAll() {
+//       this.fetch().then(data => {
+//         data.rows.forEach(element => {
+//             this.delete(element.id);
+//             console.log('deleted');
+//         });
+//       }).catch(err => {
+
+//       })
+//   }
 
   // public sync(remote: string) {
   //     let remoteDatabase = new PouchDB(remote);
@@ -114,6 +152,19 @@ export class PouchDbService {
     const url = CouchDb + 'login';
     return this.http.post(url, user);
 
+  }
+
+  async syncOneByOne() {
+    const url = CouchDb + 'sync';
+    for (const data of this.datas) {
+      if (this.syncFlag) {
+     await this.http.post(url, data).subscribe((response) => {
+        console.log(response);
+      } );
+    } else {
+      break;
+    }
+    }
   }
 
 /////////////////////////////////////////end user code//////////////////////////////////////////////
