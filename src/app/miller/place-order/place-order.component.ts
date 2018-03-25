@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./place-order.component.scss']
 })
 export class PlaceOrderComponent implements OnInit {
-  placeorderForm: FormGroup;
+  placeOrderForm: FormGroup;
   constructor(private db: PouchDbService, private route: Router) { }
 
   ngOnInit() {
-    this.placeorderForm = new FormGroup({
+    this.placeOrderForm = new FormGroup({
       type_of_commodity: new FormControl('', []),
       total_weight: new FormControl('', []),
       total_number_of_bags: new FormControl('', []),
@@ -25,6 +25,7 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
   placeorder(order) {
+    order.status = 'submitted';
     console.log('order:', order);
     this.db.push(order)
       .then((data) => console.log('order stored in pouch:', data))
