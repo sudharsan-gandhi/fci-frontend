@@ -2,6 +2,12 @@ import { Router } from '@angular/router';
 import { PouchDbService } from './../../services/pouch-db.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Order } from './../../model/order.interface';
+import { PouchDbService } from '../../services/pouch-db.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+// tslint:disable-next-line:import-blacklist
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-place-order',
@@ -9,12 +15,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./place-order.component.scss']
 })
 export class PlaceOrderComponent implements OnInit {
-
-  placeOrderForm: FormGroup;
+  placeorderForm: FormGroup;
   constructor(private db: PouchDbService, private route: Router) { }
 
   ngOnInit() {
-    this.placeOrderForm = new FormGroup({
+    this.placeorderForm = new FormGroup({
       type_of_commodity: new FormControl('', []),
       total_weight: new FormControl('', []),
       total_number_of_bags: new FormControl('', []),

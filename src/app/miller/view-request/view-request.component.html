@@ -10,10 +10,10 @@
         <a class="nav-link" [class.active]="element == 'all'" routerLink="./" (click)="onRequestTypeChange('all')">All</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [class.active]="element == 'in'" routerLink="./" (click)="onRequestTypeChange('in')">In</a>
+        <a class="nav-link" [class.active]="element == 'accepted'" routerLink="./" (click)="onRequestTypeChange('accepted')">Accepted</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [class.active]="element == 'out'" routerLink="./" (click)="onRequestTypeChange('out')">Out</a>
+        <a class="nav-link" [class.active]="element == 'ignored'" routerLink="./" (click)="onRequestTypeChange('ignored')">Ignored</a>
       </li>
     </ul>
   </div>

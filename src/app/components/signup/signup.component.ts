@@ -2,6 +2,7 @@ import { User } from './../../model/user.interface';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PouchDbService } from '../../services/pouch-db.service';
+// tslint:disable-next-line:import-blacklist
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
