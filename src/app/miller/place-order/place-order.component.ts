@@ -1,3 +1,6 @@
+import { Router } from '@angular/router';
+import { PouchDbService } from './../../services/pouch-db.service';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Order } from './../../model/order.interface';
 import { PouchDbService } from '../../services/pouch-db.service';
@@ -13,7 +16,6 @@ import { Router } from '@angular/router';
 })
 export class PlaceOrderComponent implements OnInit {
   placeorderForm: FormGroup;
-
   constructor(private db: PouchDbService, private route: Router) { }
 
   ngOnInit() {
@@ -31,5 +33,4 @@ export class PlaceOrderComponent implements OnInit {
       .then((data) => console.log('order stored in pouch:', data))
       .catch((err) => console.log('order not stored:', err));
   }
-
 }
