@@ -1,6 +1,3 @@
-import { Router } from '@angular/router';
-import { PouchDbService } from './../../services/pouch-db.service';
-import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Order } from './../../model/order.interface';
 import { PouchDbService } from '../../services/pouch-db.service';
