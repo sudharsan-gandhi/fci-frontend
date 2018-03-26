@@ -17,11 +17,18 @@
     Please fill the Sign Up form
   </div>
   <form class="col-8" [formGroup]="signupForm" (ngSubmit)='signup(signupForm.value)'>
+      <div *ngIf="errorMessage" class="alert-danger">
+          {{errorMessage}}
+          <br>
+        </div>
     <div class="form-group">
       <label for="inputEmail">Email address</label>
       <input type="email" name="email" formControlName="email" class="form-control " id="email" aria-describedby="emailHelp" placeholder="Enter email">
       <div  *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].dirty" signup class="alert-danger">
         Please enter your email id..!
+      </div>
+      <div  *ngIf="signupForm.controls['email'].hasError('pattern') && signupForm.controls['email'].dirty" signup class="alert-danger">
+        Please enter your valid email id..!
       </div>
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
@@ -37,17 +44,26 @@
       <div *ngIf="signupForm.controls['first_name'].hasError('maxlength') && signupForm.controls['first_name'].dirty" class="alert-danger">
             First Name should be maxlength of 100 characters
       </div>
+      <div *ngIf="signupForm.controls['first_name'].hasError('pattern') && signupForm.controls['first_name'].dirty" class="alert-danger">
+            First Name should contain only String spaces and dot
+      </div>
     </div>
     <div class="form-group">
       <label for="inputMiddleName">Middle Name</label>
       <input type="text" name="middle_name" formControlName="middle_name" class="form-control" id="middle_name" placeholder="middle name">
+      <div *ngIf="signupForm.controls['middle_name'].hasError('pattern') && signupForm.controls['middle_name'].dirty" class="alert-danger">
+            Middle Name should contain only String spaces and dot
+      </div>
     </div>
     <div class="form-group">
       <label for="inputLastName">Last Name</label>
       <input type="text" name="last_name" formControlName="last_name" class="form-control" id="last_name" placeholder="last name">
       <div *ngIf="signupForm.controls['last_name'].hasError('required') && signupForm.controls['last_name'].dirty" class="alert-danger">
           Last Name should not be empty....
-      </div>
+        </div>
+        <div *ngIf="signupForm.controls['last_name'].hasError('pattern') && signupForm.controls['last_name'].dirty" class="alert-danger">
+          Last Name should contain only String spaces and dot
+         </div>
     </div>
 
     <div class="form-group">
