@@ -25,6 +25,7 @@
     "@angular/router": "^5.2.0",
     "@types/pouchdb": "^6.3.2",
     "angular-bootstrap-md": "^5.2.2",
+    "angular2-jwt": "^0.2.3",
     "angular2-uuid": "^1.1.1",
     "bootstrap": "^4.0.0",
     "chart.js": "^2.5.0",

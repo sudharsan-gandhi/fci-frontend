@@ -4,6 +4,7 @@ import { UUID } from 'angular2-uuid';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { map } from 'rxjs/operators/map';
 import { FunctionCall } from '@angular/compiler';
+import { AuthHttp } from 'angular2-jwt';
 
 declare var require: any;
 const PouchDB = require( 'pouchdb' ).default;
@@ -21,7 +22,7 @@ export class PouchDbService implements OnInit {
   ngOnInit() {
 
   }
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp) {
       if (!this.isInstantiated) {
           this.database = new PouchDB('fci');
           this.isInstantiated = true;
@@ -158,7 +159,7 @@ export class PouchDbService implements OnInit {
     const url = CouchDb + 'sync';
     for (const data of this.datas) {
       if (this.syncFlag) {
-     await this.http.post(url, data).subscribe((response) => {
+     await this.authHttp.post(url, data).subscribe((response) => {
         console.log(response);
       } );
     } else {
