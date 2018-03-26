@@ -20,7 +20,7 @@ export class ViewRequestComponent implements OnInit {
   }
 
   onRequestTypeChange(type: string) {
-    console.log(" type " + type);
+    console.log('type' + type);
     this.type = type;
     this.docs = new Array();
     this.fetch(this.type);
@@ -29,10 +29,10 @@ export class ViewRequestComponent implements OnInit {
   fetch(type: string) {
     this.db.fetch().then(data => {
       console.log('docs ', data);
-      data.rows.forEach(element => {
-        console.log('element ', element.doc);
-        if (element.doc.status == type || type == 'all') {
-          this.docs.push(element.doc);
+      data.rows.forEach(datum => {
+        console.log('element ', datum.doc);
+        if (datum.doc.status === type || type === 'all') {
+          this.docs.push(datum.doc);
         }
       });
       console.log('docs pushed', this.docs);

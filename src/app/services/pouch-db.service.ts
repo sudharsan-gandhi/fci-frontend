@@ -4,6 +4,7 @@ import { UUID } from 'angular2-uuid';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { map } from 'rxjs/operators/map';
 import { FunctionCall } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 
 declare var require: any;
 const PouchDB = require('pouchdb').default;
@@ -15,7 +16,7 @@ export class PouchDbService implements OnInit {
     private database: any;
     private listener: EventEmitter<any> = new EventEmitter();
     private remoteCouch = 'http://localhost:5984/fci';
-    private datas = [];
+    private datas: any;
     private syncFlag = true;
 
     ngOnInit() {
@@ -34,12 +35,12 @@ export class PouchDbService implements OnInit {
         }).on('change', function (change) {
             console.log('change in cons', change);
         }).on('complete', function (info) {
-            // changes() was canceled
+            console.log('change', info);
         }).on('error', function (err) {
             console.log(err);
         });
-        document.addEventListener('online', this.startSync);
-        document.addEventListener('offline', this.stopSync);
+        window.addEventListener('online', () => { this.startSync(); });
+        window.addEventListener('offline', () => { this.stopSync(); });
     }
     public changes() {
         this.database.changes({
@@ -49,19 +50,25 @@ export class PouchDbService implements OnInit {
         }).on('change', function (change) {
             console.log('change', change);
         }).on('complete', function (info) {
-            // changes() was canceled
+            console.log('change', info);
         }).on('error', function (err) {
             console.log(err);
         });
     }
     public fetch() {
+        console.log('inside fetch');
         return this.database.allDocs({ include_docs: true, descending: true });
     }
     public startSync() {
+        this.syncFlag = true;
         console.log('you are online');
-        this.datas = this.fetch();
-        console.log(this.datas);
-        this.syncOneByOne();
+        this.fetch().then(data => {
+            this.datas = data;
+            console.log('start sync ', this.datas);
+            this.syncOneByOne();
+        }).catch(err => {
+            console.log('error', err);
+        });
     }
     public stopSync() {
         console.log('you are offline');
@@ -74,6 +81,7 @@ export class PouchDbService implements OnInit {
 
     public put(id: number, document: any) {
         document._id = id;
+        document.timestamp = '' + new Date().getTime();
         return this.get(id).then(result => {
             document._rev = result._rev;
             return this.database.put(document);
@@ -89,6 +97,7 @@ export class PouchDbService implements OnInit {
     }
     public push(document: any) {
         document._id = '' + new Date().getTime();
+        document.timestamp = '' + new Date().getTime();
         return this.database.put(document).then(doc => {
             console.log('push doc', doc);
         }).catch(err => {
@@ -106,8 +115,8 @@ export class PouchDbService implements OnInit {
     }
     public deleteAll() {
         this.fetch().then(data => {
-            data.rows.forEach(element => {
-                this.deleteByDoc(element.doc).then(success => {
+            data.rows.forEach(datum => {
+                this.deleteByDoc(datum.doc).then(success => {
                     console.log('success', success);
                 }).catch(err => {
                     console.log('error', err);
@@ -116,7 +125,7 @@ export class PouchDbService implements OnInit {
             });
         }).catch(err => {
 
-        })
+        });
     }
 
     // public sync(remote: string) {
@@ -176,19 +185,29 @@ export class PouchDbService implements OnInit {
 
     }
 
-    async syncOneByOne() {
+    syncOneByOne() {
         const url = CouchDb + 'sync';
-        for (const data of this.datas) {
+        console.log('datas', this.datas);
+        console.log('syn one by one', url);
+        this.datas.rows.forEach(data => {
+            console.log('sync one data', data.doc);
             if (this.syncFlag) {
-                await this.http.post(url, data).subscribe((response) => {
-                    console.log(response);
-                });
+                // const headers = new Headers({ 'Content-Type': 'application/json' });
+                // const options = new RequestOptions({ headers: headers });
+                // data.doc._rev = null;
+                delete data.doc._rev;
+                console.log('stringify ', data.doc);
+                this.http.post(url, data.doc)
+                    .subscribe((response) => {
+                        console.log(response);
+                    });
+                console.log(data);
             } else {
-                break;
+                return;
             }
-        }
+        });
     }
 
-    /////////////////////////////////////////end user code//////////////////////////////////////////////
+    // ///////////////////////////////////////end user code//////////////////////////////////////////////
 }
 

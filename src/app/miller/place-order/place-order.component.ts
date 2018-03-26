@@ -30,5 +30,6 @@ export class PlaceOrderComponent implements OnInit {
     this.db.push(order)
       .then((data) => console.log('order stored in pouch:', data))
       .catch((err) => console.log('order not stored:', err));
+      this.placeOrderForm.reset();
   }
 }
