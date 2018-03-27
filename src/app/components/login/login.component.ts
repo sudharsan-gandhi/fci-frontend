@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
     this.db.login(user).subscribe((data) => {
       this.progressBar.hide();
       const body = data.json();
+      console.log('body', body);
+      if (body.token !== undefined || body.token !== '' || body.token !== null) {
+        sessionStorage.setItem('token', body.token);
+      }
       this.route.navigateByUrl(body.path);
 
 

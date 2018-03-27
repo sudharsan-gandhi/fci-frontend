@@ -23,7 +23,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig(), http, options);
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'token',
+    tokenGetter: (() => sessionStorage.getItem('token')),
+    globalHeaders: [{ 'Content-Type': 'application/json' }],
+  }), http, options);
 }
 
 @NgModule({
@@ -49,7 +53,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatProgressBarModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [PouchDbService, ProgressBarService],
+  providers: [PouchDbService, ProgressBarService, {
+    provide: AuthHttp,
+    useFactory: authHttpServiceFactory,
+    deps: [Http, RequestOptions]
+  }],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })

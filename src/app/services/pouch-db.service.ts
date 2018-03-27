@@ -23,7 +23,7 @@ export class PouchDbService implements OnInit {
     ngOnInit() {
     }
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private authHttp: AuthHttp) {
         if (!this.isInstantiated) {
             this.database = new PouchDB('fci');
             this.isInstantiated = true;
@@ -196,7 +196,7 @@ export class PouchDbService implements OnInit {
                 // data.doc._rev = null;
                 delete data.doc._rev;
                 console.log('stringify ', data.doc);
-                this.http.post(url, data.doc)
+                this.authHttp.post(url, data.doc)
                     .subscribe((response) => {
                         console.log(response);
                     });
