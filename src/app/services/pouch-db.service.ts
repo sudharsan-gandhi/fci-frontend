@@ -4,7 +4,8 @@ import { UUID } from 'angular2-uuid';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { map } from 'rxjs/operators/map';
 import { FunctionCall } from '@angular/compiler';
-import { HttpClient } from '@angular/common/http';
+import { AuthHttp } from 'angular2-jwt';
+
 
 declare var require: any;
 const PouchDB = require('pouchdb').default;
