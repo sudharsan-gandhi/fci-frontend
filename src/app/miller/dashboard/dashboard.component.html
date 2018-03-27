@@ -1,5 +1,4 @@
 <header>
-
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-blue scrolling-navbar">
     <a class="navbar-brand" href="#">
       <strong>FCI</strong>
@@ -10,21 +9,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item ">
-          <a class="nav-link" routerLink="./dashboard">Place order
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link " routerLink="./dashboard">Place order
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="./requests">View Requests</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="./requests" routerLinkActive="active">View Requests</a>
 
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./notifications">Transit loss notifications</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" href="./notifications" routerLinkActive="active">Transit loss notifications</a>
         </li>
-
       </ul>
-
       <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
           <a class="nav-link">
@@ -34,7 +31,6 @@
     </div>
   </nav>
 </header>
-
 <main>
   <router-outlet></router-outlet>
 </main>
