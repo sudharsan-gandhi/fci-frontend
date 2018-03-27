@@ -12,6 +12,7 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewRequestComponent } from './view-request/view-request.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ViewRequestComponent } from './view-request/view-request.component';
     MillerRoutingModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     SharedModule,
     MDBBootstrapModule.forRoot()
   ],

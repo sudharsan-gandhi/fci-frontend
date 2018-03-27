@@ -1,3 +1,5 @@
+import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -19,11 +21,13 @@ import { ConsumerRequestsComponent } from './consumer-requests/consumer-requests
     CommonModule,
     DepotManagerRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
+    HttpModule,
     MDBBootstrapModule.forRoot()
   ],
   declarations: [DashboardComponent, MillerRequestsComponent, CommodityStatusComponent, RecordsComponent
     , WeighbridgeDetailsComponent, ShedDetailsComponent, ConsumerRequestsComponent],
-    providers: [DepotManagerService],
-    schemas: [NO_ERRORS_SCHEMA]
+  providers: [DepotManagerService],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class DepotManagerModule { }

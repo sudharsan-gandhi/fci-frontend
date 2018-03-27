@@ -14,21 +14,31 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
+  public errorMessage: String;
   constructor(private db: PouchDbService, private route: Router) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      first_name: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
-      last_name: new FormControl(null, [Validators.required]),
-      middle_name: new FormControl(null, []),
-      email: new FormControl(null, [Validators.required]),
+      // tslint:disable-next-line:max-line-length
+      first_name: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('(?:[a-zA-z.\\s])*')]),
+      last_name: new FormControl(null, [Validators.required, Validators.pattern('(?:[a-zA-z.\\s])*')]),
+      middle_name: new FormControl(null, [Validators.pattern('(?:[a-zA-z.\\s])*')]),
+      email: new FormControl(null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}')]),
       password: new FormControl(null, [Validators.required, Validators.pattern('(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}')]),
     });
   }
 
   signup(user: User) {
     console.log('user:', user);
-    this.db.userSignup(user).subscribe(data => this.route.navigateByUrl(''), error => console.error(error));
+    this.db.userSignup(user).subscribe(data =>{
+        const body = data.json();
+       this.route.navigateByUrl(body.path);
+    }, error => {
+      const body = JSON.parse(error._body);
+      this.errorMessage = JSON.stringify(body.error_msg) ;
+      this.route.navigateByUrl(body.path);
+    }
+    );
   }
 
 
