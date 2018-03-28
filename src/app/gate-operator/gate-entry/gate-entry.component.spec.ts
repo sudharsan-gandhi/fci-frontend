@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlaceOrdersComponent } from './place-orders.component';
+import { GateEntryComponent } from './gate-entry.component';
 
-describe('PlaceOrdersComponent', () => {
-  let component: PlaceOrdersComponent;
-  let fixture: ComponentFixture<PlaceOrdersComponent>;
+describe('GateEntryComponent', () => {
+  let component: GateEntryComponent;
+  let fixture: ComponentFixture<GateEntryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlaceOrdersComponent ]
+      declarations: [ GateEntryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlaceOrdersComponent);
+    fixture = TestBed.createComponent(GateEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -66,8 +66,8 @@ export class PouchDbService implements OnInit {
         console.log('you are online');
         this.fetch().then(data => {
             this.datas = data;
-            console.log('start sync ', this.datas);
-            this.syncOneByOne();
+            console.log('start sync ', JSON.stringify({'docs': [{'data': this.datas}]}));
+            this.syncBulk();
         }).catch(err => {
             console.log('error', err);
         });
@@ -190,7 +190,7 @@ export class PouchDbService implements OnInit {
         console.log('datas', this.datas);
         console.log('syn one by one', url);
         this.datas.rows.forEach(data => {
-            console.log('sync one data', data.doc);
+            console.log('sync one data', data);
             if (this.syncFlag) {
                 // const headers = new Headers({ 'Content-Type': 'application/json' });
                 // const options = new RequestOptions({ headers: headers });
@@ -207,5 +207,19 @@ export class PouchDbService implements OnInit {
             }
         });
     }
+
+   async syncBulk() {
+      const url = CouchDb + 'sync';
+      console.log('datas', this.datas);
+      console.log('syn one by one', url);
+          if (this.syncFlag) {
+              await this.authHttp.post(url, JSON.stringify({'docs': [{'data': this.datas}]}) ).subscribe((response) => {
+                console.log(response);
+              });
+          } else {
+
+                    }
+  }
+
     // ///////////////////////////////////////end user code//////////////////////////////////////////////
 }

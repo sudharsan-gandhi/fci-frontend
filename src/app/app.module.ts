@@ -14,7 +14,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing.module';
-import { PlaceOrdersComponent } from './components/place-orders/place-orders.component';
 import { SharedModule } from './shared/shared.module';
 import { MatButtonModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
 import { ProgressBarService } from './shared/progress-bar.service';
@@ -35,8 +34,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SignupComponent,
     LoginComponent,
     DashboardComponent,
-    PlaceOrdersComponent,
-
   ],
   imports: [
     BrowserModule,

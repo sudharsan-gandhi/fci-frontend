@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AppComponent } from './app.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { PlaceOrdersComponent } from './components/place-orders/place-orders.component';
 
 
 const routes: Routes = [
@@ -32,8 +31,12 @@ const routes: Routes = [
       loadChildren: 'app/depot-manager/depot-manager.module#DepotManagerModule'
     },
     {
-        path: 'depot-operator',
-        loadChildren: 'app/depot-operator/depot-operator.module#DepotOperatorModule'
+       path: 'depot-operator',
+       loadChildren: 'app/depot-operator/depot-operator.module#DepotOperatorModule'
+    },
+    {
+      path: 'gate-operator',
+      loadChildren: 'app/gate-operator/gate-operator.module#GateOperatorModule'
     }
     // {
     //   path: '**',
