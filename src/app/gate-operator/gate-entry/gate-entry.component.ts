@@ -16,15 +16,7 @@ export class GateEntryComponent implements OnInit {
 
 
   ngOnInit() {
-    this.db.fetch().then(data => {
-      data.rows.forEach(element => {
-        console.log('element ', element.doc);
-        this.docs.push(element.doc);
-        console.log('docs', this.docs);
-      });
-    }).catch(err => {
-      console.log('error', err);
-    });
+    this.fetch('all');
   }
   active(doc: any) {
     doc.status = 'active';
@@ -48,7 +40,7 @@ export class GateEntryComponent implements OnInit {
       console.log('docs ', data);
       data.rows.forEach( doc => {
         console.log('element ', doc.doc);
-        if (doc.doc.status === type || type === 'all') {
+        if ( (doc.doc.status === type) || (type === 'all' && doc.doc.status !== 'submitted')) {
           this.docs.push(doc.doc);
         }
       });
