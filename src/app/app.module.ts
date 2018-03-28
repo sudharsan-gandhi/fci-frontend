@@ -9,7 +9,6 @@ import { PouchDbService } from './services/pouch-db.service';
 
 // component imports
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';

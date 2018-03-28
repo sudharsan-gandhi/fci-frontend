@@ -8,16 +8,17 @@ import { AuthHttp } from 'angular2-jwt';
 
 
 declare var require: any;
+// const PouchDB = require('pouchdb').default;
 const PouchDB = require('pouchdb').default;
 const CouchDb = 'http://localhost:8000/';
 
 @Injectable()
 export class PouchDbService implements OnInit {
     private isInstantiated: boolean;
-    private database: any;
+    private database = new PouchDB('fci');
     private listener: EventEmitter<any> = new EventEmitter();
     private remoteCouch = 'http://localhost:5984/fci';
-    private datas: any;
+    private datas: any
     private syncFlag = true;
 
     ngOnInit() {
