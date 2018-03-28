@@ -1,0 +1,96 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+
+        <th>Request Id</th>
+        <th>Type of Commodity</th>
+        <th>Number of Bags</th>
+        <th>Total Weight</th>
+        <th>Mode of Transport</th>
+        <th>Total Cost</th>
+        <th>Status</th>
+        <th>Weight</th>
+        <th>Measured Weight</th>
+        <th>Transit Loss</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of docs">
+        <th>{{ doc._id }}</th>
+        <td>{{ doc.type_of_commodity }}</td>
+        <td>{{ doc.total_number_of_bags }}</td>
+        <td>{{ doc.total_weight }}</td>
+        <td>{{ doc.mode_of_transport }}</td>
+        <td>{{ doc.total_cost }}</td>
+        <td>
+          <h5 *ngIf="doc.status == 'accepted'">
+            <span class="badge badge-pill badge-success">{{ doc.status }}</span>
+          </h5>
+          <h5 *ngIf="doc.status == 'rejected'">
+            <span class="badge badge-pill badge-danger">{{ doc.status }}</span>
+          </h5>
+          <h5 *ngIf="doc.status == 'submitted'">
+            <span class="badge badge-pill badge-primary">{{ doc.status }}</span>
+          </h5>
+        </td>
+        <td class="btn-padding-0">
+          <button type="button" class="btn btn-primary waves-light " (click)="form.show()" mdbRippleRadius>
+            Enter Weight</button>
+          <!--Modal: Subscription From-->
+          <div mdbModal #form="mdb-modal" class="modal fade" id="modalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+              <!--Content-->
+              <div class="modal-content">
+
+                <!--Header-->
+                <div class="modal-header light-blue darken-3 white-text">
+                  <h4 class="title">
+                    <i class="fa fa-newspaper-o"></i>{{ doc._id }} - Measure Weight Details</h4>
+                  <button type="button" class="close waves-effect waves-light" value="doc.measuredWeight" data-dismiss="modal" aria-label="Close"
+                    (click)="form.hide()">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <!--Body-->
+                <div class="modal-body mb-0">
+
+                  <form action="" [formGroup] = "measuredWeightForm" (ngSubmit)="submitMeasuredWeight(measuredWeightForm.value, doc)">
+                    <div class="md-form form-sm">
+                      <i class="fas fa-weight"></i>
+                      <input mdbActive type="text" id="form27" formControlName="measuredWeight" class="form-control" value="{{ doc.measuredWeight }}">
+                      <label for="form27">Total Measured Weight</label>
+                    </div>
+                    <div class="text-center mt-1-half">
+                      <button type="submit"  (click) = "form.hide()" class="btn btn-info mb-1 waves-light" mdbRippleRadius>Submit
+                        <i class="fa fa-check ml-1"></i>
+                      </button>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+              <!--/.Content-->
+            </div>
+          </div>
+          <!--Modal: Subscription From-->
+        </td>
+        <td>
+          <span *ngIf="doc.measuredWeight === undefined ">Not yet entered</span>
+          <span *ngIf="doc.measuredWeight !== undefined ">{{ doc.measuredWeight }}</span>
+        </td>
+        <td>
+          <span *ngIf="doc.transitLoss === undefined ">Enter Weight to calculate transit loss</span>
+          <span *ngIf="doc.transitLoss !== undefined ">{{ doc.transitLoss }} %</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
