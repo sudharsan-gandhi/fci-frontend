@@ -30,6 +30,10 @@ const routes: Routes = [
     {
       path: 'depot-manager',
       loadChildren: 'app/depot-manager/depot-manager.module#DepotManagerModule'
+    },
+    {
+      path: 'gate-operator',
+      loadChildren: 'app/gate-operator/gate-operator.module#GateOperatorModule'
     }
     // {
     //   path: '**',
