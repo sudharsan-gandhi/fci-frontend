@@ -19,7 +19,7 @@ export class ViewMillerRequestComponent implements OnInit {
     this.measuredWeightForm = new FormGroup({
       'measuredWeight': new FormControl(null)
     });
-    this.type = Status.accepted;
+    this.type = Status.active;
     // this.db.deleteAll();
     this.fetch(this.type);
   }

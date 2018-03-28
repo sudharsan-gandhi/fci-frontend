@@ -27,10 +27,18 @@
     <thead>
       <tr>
 
-        <th><b>Request Id</b></th>
-        <th><b>Mode of Transport</b></th>
-        <th><b>Status</b></th>
-        <th><b>Set State</b></th>
+        <th>
+          <b>Request Id</b>
+        </th>
+        <th>
+          <b>Mode of Transport</b>
+        </th>
+        <th>
+          <b>Status</b>
+        </th>
+        <th>
+          <b>Set State</b>
+        </th>
 
 
       </tr>
@@ -50,17 +58,18 @@
             <span class="badge badge-pill badge-primary">{{ doc.status }}</span>
           </h5> -->
         </td>
-       <!-- <td id="state" >
+        <!-- <td id="state" >
           <div>
             <h5>
                {{ doc.state }}</h5>
           </div>
         </td> -->
         <td>
-          <div>
-            <button class="btn btn-success waves-light"  (click)="active(doc)" *ngIf="doc.status == 'accepted'" [disabled]="doc.status == 'active' || doc.status == 'complete'" mdbRippleRadius>Active </button>
-            <button class="btn btn-success waves-light" *ngIf="doc.status == 'active'" (click)="complete(doc)"  mdbRippleRadius>Complete </button>
-          </div>
+
+          <button class="btn btn-success waves-light" (click)="active(doc)" *ngIf="doc.status == 'accepted'" [disabled]="doc.status == 'active' || doc.status == 'complete'"
+            mdbRippleRadius>Active </button>
+          <button class="btn btn-success waves-light" *ngIf="doc.status == 'active'" (click)="complete(doc)" mdbRippleRadius>Complete </button>
+
         </td>
       </tr>
     </tbody>
