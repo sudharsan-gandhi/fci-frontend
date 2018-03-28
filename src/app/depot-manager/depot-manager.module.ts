@@ -12,7 +12,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { MillerRequestsComponent } from './miller-requests/miller-requests.component';
 import { CommodityStatusComponent } from './commodity-status/commodity-status.component';
 import { RecordsComponent } from './records/records.component';
-import { WeighbridgeDetailsComponent } from './weighbridge-details/weighbridge-details.component';
 import { ShedDetailsComponent } from './shed-details/shed-details.component';
 import { ConsumerRequestsComponent } from './consumer-requests/consumer-requests.component';
 
@@ -26,8 +25,8 @@ import { ConsumerRequestsComponent } from './consumer-requests/consumer-requests
     MDBBootstrapModule.forRoot()
   ],
   declarations: [DashboardComponent, MillerRequestsComponent, CommodityStatusComponent, RecordsComponent
-    , WeighbridgeDetailsComponent, ShedDetailsComponent, ConsumerRequestsComponent],
-  providers: [DepotManagerService],
-  schemas: [NO_ERRORS_SCHEMA]
+    , ShedDetailsComponent, ConsumerRequestsComponent],
+    providers: [DepotManagerService],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class DepotManagerModule { }
