@@ -2,5 +2,6 @@ export enum Status {
     active = 'active',
     accepted = 'accepted',
     complete = 'complete',
-    rejected = 'rejected'
+    rejected = 'rejected',
+    submitted = 'submitted'
 }

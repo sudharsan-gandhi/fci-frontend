@@ -1,5 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { PouchDbService } from '../../services/pouch-db.service';
+import { Status } from '../../shared/enums/status.enum';
 
 @Component({
   selector: 'app-miller-requests',
@@ -15,8 +17,10 @@ export class MillerRequestsComponent implements OnInit {
     this.db.fetch().then(data => {
       data.rows.forEach(element => {
         console.log('element ', element.doc);
-        this.docs.push(element.doc);
-        console.log('docs', this.docs);
+        if (element.doc.status === Status.submitted || element.doc.status === Status.accepted || element.doc.status === Status.rejected) {
+          this.docs.push(element.doc);
+          console.log('docs', this.docs);
+        }
       });
     }).catch(err => {
       console.log('error', err);
