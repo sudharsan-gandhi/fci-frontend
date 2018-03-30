@@ -1,5 +1,6 @@
 import { PouchDbService } from './../../services/pouch-db.service';
 import { Component, OnInit } from '@angular/core';
+import { LogoutService } from '../../services/logout.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private db: PouchDbService) { }
+
+  constructor(private db: PouchDbService, private logout: LogoutService) { }
 
   ngOnInit() {
     this.db.sync();
   }
 
+  public signout() {
+    this.logout.logout();
+  }
 }

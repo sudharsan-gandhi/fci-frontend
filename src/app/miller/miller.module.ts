@@ -13,6 +13,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ViewRequestComponent } from './view-request/view-request.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LogoutService } from '../services/logout.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     MDBBootstrapModule.forRoot()
   ],
   declarations: [DashboardComponent, PlaceOrderComponent, ViewRequestComponent],
-  providers: [MillerService],
+  providers: [MillerService, LogoutService],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class MillerModule { }

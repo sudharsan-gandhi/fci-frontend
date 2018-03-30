@@ -6,6 +6,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 // service imports
 import { PouchDbService } from './services/pouch-db.service';
+import { LogoutService } from './services/logout.service';
 
 // component imports
 import { AppComponent } from './app.component';
@@ -49,7 +50,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MatProgressBarModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [PouchDbService, ProgressBarService, {
+  providers: [PouchDbService, ProgressBarService, LogoutService, {
     provide: AuthHttp,
     useFactory: authHttpServiceFactory,
     deps: [Http, RequestOptions]

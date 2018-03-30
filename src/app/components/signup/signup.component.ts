@@ -30,6 +30,7 @@ export class SignupComponent implements OnInit {
 
   signup(user: User) {
     console.log('user:', user);
+    user.role = 'miller';
     this.db.userSignup(user).subscribe(data => {
         const body = data.json();
        this.route.navigateByUrl(body.path);

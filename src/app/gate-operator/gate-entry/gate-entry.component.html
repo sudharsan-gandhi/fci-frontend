@@ -48,9 +48,10 @@
         <th>{{ doc._id }}</th>
         <td>{{ doc.mode_of_transport }}</td>
         <td>
-          <h5>
+          <h5 >
             <span class="badge badge-pill badge-success" *ngIf="doc.status === 'complete'">{{ doc.status }}</span>
             <span class="badge badge-pill badge-warning" *ngIf="doc.status === 'active'">{{ doc.status }}</span>
+            <span class="badge badge-pill badge-primary" *ngIf="doc.status === 'accepted'">{{ doc.status }}</span>
           </h5>
           <!-- <h5 *ngIf="doc.status == 'rejected'">
             <span class="badge badge-pill badge-danger">{{ doc.status }}</span>
