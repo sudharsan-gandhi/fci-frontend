@@ -1,7 +1,8 @@
-
+import { Type } from './../../shared/enums/type.enum';
 import { Component, OnInit } from '@angular/core';
 import { PouchDbService } from '../../services/pouch-db.service';
 import { Status } from '../../shared/enums/status.enum';
+
 
 @Component({
   selector: 'app-miller-requests',
@@ -11,15 +12,24 @@ import { Status } from '../../shared/enums/status.enum';
 export class MillerRequestsComponent implements OnInit {
 
   docs: any[] = new Array();
+  shed: any;
+  shedPercentage = 0;
   constructor(private db: PouchDbService) { }
 
   ngOnInit() {
+    // this.db.deleteAll();
     this.db.fetch().then(data => {
       data.rows.forEach(element => {
         console.log('element ', element.doc);
-        if (element.doc.status === Status.submitted || element.doc.status === Status.accepted || element.doc.status === Status.rejected) {
+        // tslint:disable-next-line:max-line-length
+        if ((element.doc.status === Status.submitted || element.doc.status === Status.accepted || element.doc.status === Status.rejected) && (element.doc.type === Type.millerRequest)) {
           this.docs.push(element.doc);
           console.log('docs', this.docs);
+        } else if (element.doc.type === Type.shed) {
+          this.shed = element.doc;
+          console.log('shed', this.shed);
+          this.shedPercentage = ((this.shed.allotedSheds) / this.shed.numberOfSheds) * 100;
+          console.log('shed Percentage', this.shedPercentage.toFixed(0));
         }
       });
     }).catch(err => {
@@ -28,15 +38,71 @@ export class MillerRequestsComponent implements OnInit {
   }
 
   accept(doc: any) {
-    doc.status = 'accepted';
+    doc.status = Status.accepted;
     console.log('accept ', doc);
-    this.db.put(doc._id, doc);
+    if (this.shed !== undefined && this.shed !== null) {
+
+      const tonsPerShed = this.shed.tonsPerShed;
+      const totalNumberOfSheds = this.shed.numberOfSheds;
+      const allotedSheds = this.shed.allotedSheds;
+      const allotedTons = this.shed.allotedTons;
+      const remainingTons = (totalNumberOfSheds * tonsPerShed) - allotedTons;
+
+      if (remainingTons - doc.total_weight > 0) {
+        this.shed.allotedTons = Number(this.shed.allotedTons) + Number(doc.total_weight);
+        this.shed.allotedSheds = (totalNumberOfSheds - (((totalNumberOfSheds * tonsPerShed) - doc.total_weight) / tonsPerShed));
+
+        // Calculate Shed Percentage
+        this.shedPercentage = ((this.shed.allotedSheds) / this.shed.numberOfSheds) * 100;
+        console.log('updated shed percentage ', this.shedPercentage);
+        console.log(this.shed.allotedTons, 'Sample', this.shed.allotedSheds);
+
+        // Update miller object
+        doc.allotedShed = this.shed.allotedSheds;
+
+        console.log('alloted shed for miller ', doc);
+
+        // Update DB
+        this.db.put(doc._id, doc);
+        this.db.put(this.shed._id, this.shed);
+      }
+
+    }
+
   }
 
   decline(doc: any) {
-    doc.status = 'rejected';
-    console.log('decline ', doc);
-    this.db.put(doc._id, doc);
+    // doc.status = Status.rejected;
+    // console.log('decline ', doc);
+    // this.db.put(doc._id, doc);
+    doc.status = Status.rejected;
+    console.log('rejected ', doc);
+    if (this.shed !== undefined && this.shed !== null) {
+
+      const tonsPerShed = this.shed.tonsPerShed;
+      const totalNumberOfSheds = this.shed.numberOfSheds;
+      const allotedSheds = this.shed.allotedSheds;
+      const allotedTons = this.shed.allotedTons;
+      const remainingTons = (totalNumberOfSheds * tonsPerShed) - allotedTons;
+
+      this.shed.allotedTons = Number(this.shed.allotedTons) - Number(doc.total_weight);
+      const unUsedShed = ((totalNumberOfSheds - allotedSheds) * tonsPerShed) + (allotedSheds * tonsPerShed);
+      this.shed.totalNumberOfSheds = unUsedShed + allotedSheds;
+
+      doc.allotedShed = 0;
+
+
+      // Calculate Shed Percentage
+      this.shedPercentage = ((this.shed.allotedSheds) / this.shed.numberOfSheds) * 100;
+      console.log('updated shed percentage ', this.shedPercentage);
+      console.log(this.shed.allotedTons, 'Sample', this.shed.allotedSheds);
+
+      // Update DB
+      this.db.put(doc._id, doc);
+      this.db.put(this.shed._id, this.shed);
+
+
+    }
   }
 
 }
