@@ -175,7 +175,6 @@ export class PouchDbService implements OnInit {
     //////////////////////////////////////// user code/////////////////////////////////////////////////
     // user signup
     public userSignup(user) {
-        user.type = 'user';
         const url = CouchDb + 'signup';
         return this.http.post(url, user);
     }
@@ -223,15 +222,15 @@ export class PouchDbService implements OnInit {
     }
 
     public validate() {
-      const url = CouchDb + 'api';
-      let val = false;
-      console.log('validating user');
-      this.authHttp.post(url, {} ).subscribe((data) => {
-        val = true;
-      }, (err) => {
-        val = false;
-      });
-      return val;
+        const url = CouchDb + 'api';
+        let val = false;
+        console.log('validating user');
+        this.authHttp.post(url, {}).subscribe((data) => {
+            val = true;
+        }, (err) => {
+            val = false;
+        });
+        return val;
     }
 
     // ///////////////////////////////////////end user code//////////////////////////////////////////////

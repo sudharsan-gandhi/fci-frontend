@@ -1,3 +1,4 @@
+import { Type } from './../../shared/enums/type.enum';
 import { User } from './../../model/user.interface';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -30,9 +31,11 @@ export class SignupComponent implements OnInit {
 
   signup(user: User) {
     console.log('user:', user);
-    user.role = 'miller';
+    user.type = Type.miller;
+    console.log('user:', user);
     this.db.userSignup(user).subscribe(data => {
         const body = data.json();
+        console.log('signup path', body);
        this.route.navigateByUrl(body.path);
     }, error => {
       const body = JSON.parse(error._body);
