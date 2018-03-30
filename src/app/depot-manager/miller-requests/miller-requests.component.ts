@@ -42,21 +42,18 @@ export class MillerRequestsComponent implements OnInit {
     console.log('accept ', doc);
     if (this.shed !== undefined && this.shed !== null) {
 
-      const tonsPerShed = this.shed.tonsPerShed;
-      const totalNumberOfSheds = this.shed.numberOfSheds;
-      const allotedSheds = this.shed.allotedSheds;
-      const allotedTons = this.shed.allotedTons;
-      const remainingTons = (totalNumberOfSheds * tonsPerShed) - allotedTons;
-
+      const tonsPerShed = +this.shed.tonsPerShed;
+      const totalNumberOfSheds = +this.shed.numberOfSheds;
+      const allotedSheds = +this.shed.allotedSheds;
+      const allotedTons = +this.shed.allotedTons;
+      const tonnesToBeUsed = Number((((doc.total_weight)) / (totalNumberOfSheds * tonsPerShed)) * 100).toFixed(2);
+      const remainingTons = Number((totalNumberOfSheds * tonsPerShed) - ((Number(this.shed.allotedSheds) * tonsPerShed * 100 ) / 100));
+      if (this.shed.allotedSheds !== 0) {
+        this.shedPercentage = Number(this.shed.allotedSheds);
+      }
       if (remainingTons - doc.total_weight > 0) {
-        this.shed.allotedTons = Number(this.shed.allotedTons) + Number(doc.total_weight);
-        this.shed.allotedSheds = (totalNumberOfSheds - (((totalNumberOfSheds * tonsPerShed) - doc.total_weight) / tonsPerShed));
-
-        // Calculate Shed Percentage
-        this.shedPercentage = ((this.shed.allotedSheds) / this.shed.numberOfSheds) * 100;
-        console.log('updated shed percentage ', this.shedPercentage);
-        console.log(this.shed.allotedTons, 'Sample', this.shed.allotedSheds);
-
+        this.shedPercentage = +(Number(this.shed.allotedSheds) + Number(tonnesToBeUsed));
+        this.shed.allotedSheds = +this.shedPercentage;
         // Update miller object
         doc.allotedShed = this.shed.allotedSheds;
 
@@ -66,43 +63,34 @@ export class MillerRequestsComponent implements OnInit {
         this.db.put(doc._id, doc);
         this.db.put(this.shed._id, this.shed);
       }
-
     }
-
   }
 
   decline(doc: any) {
-    // doc.status = Status.rejected;
-    // console.log('decline ', doc);
-    // this.db.put(doc._id, doc);
     doc.status = Status.rejected;
     console.log('rejected ', doc);
     if (this.shed !== undefined && this.shed !== null) {
 
-      const tonsPerShed = this.shed.tonsPerShed;
-      const totalNumberOfSheds = this.shed.numberOfSheds;
-      const allotedSheds = this.shed.allotedSheds;
-      const allotedTons = this.shed.allotedTons;
-      const remainingTons = (totalNumberOfSheds * tonsPerShed) - allotedTons;
+      const tonsPerShed = +this.shed.tonsPerShed;
+      const totalNumberOfSheds = +this.shed.numberOfSheds;
+      const allotedSheds = +this.shed.allotedSheds;
+      const allotedTons = +this.shed.allotedTons;
+      const tonnesToBeUsed = Number((((doc.total_weight)) / (totalNumberOfSheds * tonsPerShed)) * 100).toFixed(2);
+      const remainingTons = Number((totalNumberOfSheds * tonsPerShed) - ((Number(this.shed.allotedSheds) * tonsPerShed * 100 ) / 100));
+      if (this.shed.allotedSheds !== 0) {
+        this.shedPercentage = Number(this.shed.allotedSheds);
+      }
+        this.shedPercentage = +(Number(this.shed.allotedSheds) - Number(tonnesToBeUsed));
+        this.shed.allotedSheds = +this.shedPercentage;
+        // Update miller object
+        doc.allotedShed = this.shed.allotedSheds;
 
-      this.shed.allotedTons = Number(this.shed.allotedTons) - Number(doc.total_weight);
-      const unUsedShed = ((totalNumberOfSheds - allotedSheds) * tonsPerShed) + (allotedSheds * tonsPerShed);
-      this.shed.totalNumberOfSheds = unUsedShed + allotedSheds;
+        console.log('alloted shed for miller ', doc);
 
-      doc.allotedShed = 0;
-
-
-      // Calculate Shed Percentage
-      this.shedPercentage = ((this.shed.allotedSheds) / this.shed.numberOfSheds) * 100;
-      console.log('updated shed percentage ', this.shedPercentage);
-      console.log(this.shed.allotedTons, 'Sample', this.shed.allotedSheds);
-
-      // Update DB
-      this.db.put(doc._id, doc);
-      this.db.put(this.shed._id, this.shed);
-
-
-    }
+        // Update DB
+        this.db.put(doc._id, doc);
+        this.db.put(this.shed._id, this.shed);
+      }
   }
 
 }

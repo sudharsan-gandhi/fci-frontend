@@ -6,7 +6,7 @@
 
 <div class="col-10 center mx-auto" *ngIf="shedPercentage !== undefined && shed !== undefined">
   <mat-progress-bar mode="determinate" color="primary" value="{{shedPercentage}}" class="shed-availability-status  "></mat-progress-bar>
-  <span>Available : {{ shed.allotedSheds }}</span>
+  <span>Allocated : {{ shed.allotedSheds }}</span>
   <span class="float-right">Total : {{ shed.numberOfSheds }}</span>
 </div>
 
