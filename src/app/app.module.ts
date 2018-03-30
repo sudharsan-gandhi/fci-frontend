@@ -34,7 +34,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppComponent,
     SignupComponent,
     LoginComponent,
-    DashboardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

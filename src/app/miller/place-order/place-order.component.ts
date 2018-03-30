@@ -1,3 +1,5 @@
+import { Type } from './../../shared/enums/type.enum';
+import { Status } from './../../shared/enums/status.enum';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Order } from './../../model/order.interface';
@@ -25,11 +27,13 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
   placeorder(order) {
-    order.status = 'submitted';
+    order.status = Status.submitted;
+    order.userId = sessionStorage.getItem('userId');
+    order.type = Type.millerRequest;
     console.log('order:', order);
     this.db.push(order)
       .then((data) => console.log('order stored in pouch:', data))
       .catch((err) => console.log('order not stored:', err));
-      this.placeOrderForm.reset();
+    this.placeOrderForm.reset();
   }
 }

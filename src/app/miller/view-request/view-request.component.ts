@@ -1,3 +1,4 @@
+import { Type } from './../../shared/enums/type.enum';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { PouchDbService } from '../../services/pouch-db.service';
@@ -31,7 +32,7 @@ export class ViewRequestComponent implements OnInit {
       console.log('docs ', data);
       data.rows.forEach(datum => {
         console.log('element ', datum.doc);
-        if (datum.doc.status === type || type === 'all') {
+        if ((datum.doc.status === type || type === 'all') && (datum.doc.type === Type.millerRequest)) {
           this.docs.push(datum.doc);
         }
       });

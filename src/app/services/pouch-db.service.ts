@@ -18,7 +18,7 @@ export class PouchDbService implements OnInit {
     private database = new PouchDB('fci');
     private listener: EventEmitter<any> = new EventEmitter();
     private remoteCouch = 'http://localhost:5984/fci';
-    private datas: any
+    private datas: any;
     private syncFlag = true;
 
     ngOnInit() {
@@ -66,8 +66,9 @@ export class PouchDbService implements OnInit {
         console.log('you are online');
         this.fetch().then(data => {
             this.datas = data;
-            console.log('start sync ', JSON.stringify({'docs': [{'data': this.datas}]}));
-            this.syncBulk();
+            console.log('start sync ', JSON.stringify({ 'docs': [{ 'data': this.datas }] }));
+            // this.syncBulk();
+            this.sync();
         }).catch(err => {
             console.log('error', err);
         });
@@ -77,11 +78,11 @@ export class PouchDbService implements OnInit {
         this.syncFlag = false;
     }
 
-    public get(id: number) {
+    public get(id: string) {
         return this.database.get(id);
     }
 
-    public put(id: number, document: any) {
+    public put(id: string, document: any) {
         document._id = id;
         document.timestamp = '' + new Date().getTime();
         return this.get(id).then(result => {
@@ -89,7 +90,7 @@ export class PouchDbService implements OnInit {
             return this.database.put(document);
         }, error => {
             if (error.status === '404') {
-                return this.database.put(document);
+                return this.database.push(document);
             } else {
                 return new Promise((resolve, reject) => {
                     reject(error);
@@ -130,16 +131,16 @@ export class PouchDbService implements OnInit {
         });
     }
 
-    // public sync(remote: string) {
-    //     let remoteDatabase = new PouchDB(remote);
-    //     this.database.sync(remoteDatabase, {
-    //         live: true
-    //     }).on('change', change => {
-    //         this.listener.emit(change);
-    //     }).on('error', error => {
-    //         console.error(JSON.stringify(error));
-    //     });
-    // }
+    public sync() {
+        this.database.sync(this.remoteCouch, {
+            live: true
+        }).on('change', change => {
+            this.listener.emit(change);
+            console.log('change in remote ', change);
+        }).on('error', error => {
+            console.error(JSON.stringify(error));
+        });
+    }
     public getDatabase() {
         return this.database;
     }
@@ -149,10 +150,10 @@ export class PouchDbService implements OnInit {
     }
 
 
-    public sync() {
-        const opts = { live: true };
-        this.database.sync(this.remoteCouch, opts);
-    }
+    // public sync() {
+    //     const opts = { live: true };
+    //     this.database.sync(this.remoteCouch, opts);
+    // }
 
     public info() {
         return this.database.info();
@@ -208,18 +209,18 @@ export class PouchDbService implements OnInit {
         });
     }
 
-   async syncBulk() {
-      const url = CouchDb + 'sync';
-      console.log('datas', this.datas);
-      console.log('syn one by one', url);
-          if (this.syncFlag) {
-              await this.authHttp.post(url, JSON.stringify({'docs': [{'data': this.datas}]}) ).subscribe((response) => {
+    async syncBulk() {
+        const url = CouchDb + 'sync';
+        console.log('datas', this.datas);
+        console.log('syn one by one', url);
+        if (this.syncFlag) {
+            await this.authHttp.post(url, JSON.stringify({ 'docs': [{ 'data': this.datas }] })).subscribe((response) => {
                 console.log(response);
-              });
-          } else {
+            });
+        } else {
 
-                    }
-  }
+        }
+    }
 
     public validate() {
       const url = CouchDb + 'api';

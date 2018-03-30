@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ProgressBarService {
 
-  isLoading: boolean = false;
+  isLoading = false;
   loadingChange: Subject<boolean> = new Subject<boolean>();
   constructor() { }
 

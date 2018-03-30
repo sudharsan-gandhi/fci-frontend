@@ -1,0 +1,39 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container col-md-6" *ngIf="isShedAlloted">
+  <!-- Card -->
+  <div class="card  ">
+
+    <!-- Card body -->
+    <div class="card-body col-md-11">
+
+      <form [formGroup]="shedAllotmentForm" (ngSubmit)='allotShed(shedAllotmentForm.value)'>
+        <p class="h5 text-center mb-4">Shed Allotment</p>
+        <div class="md-form">
+          <input type="text" formControlName="numberOfSheds" value="{{shedDetail.numberOfSheds}}" id="number_of_sheds" name="number_of_sheds" class="form-control" mdbActive>
+          <label for="number_of_sheds">Number of Sheds</label>
+        </div>
+        <div class="md-form">
+          <input type="text" formControlName="tonsPerShed" value="{{shedDetail.tonsPerShed}}" name="tons_per_shed" id="tons_per_shed" class="form-control"
+            mdbActive>
+          <label for="tons_per_shed">Tons Per Shed</label>
+        </div>
+        <input type="hidden" value="shedDetail.type" name="type" fomControlName="type">
+        <div class="text-center">
+          <button type="submit" class="btn btn-default waves-light" mdbRippleRadius>Save</button>
+        </div>
+      </form>
+
+      <!-- Material form register -->
+
+    </div>
+    <!-- Card body -->
+
+  </div>
+  <!-- Card -->
+</div>

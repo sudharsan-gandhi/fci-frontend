@@ -37,6 +37,10 @@ const routes: Routes = [
     {
       path: 'gate-operator',
       loadChildren: 'app/gate-operator/gate-operator.module#GateOperatorModule'
+    },
+    {
+        path: 'shed-management',
+        loadChildren: 'app/shed-management/shed-management.module#ShedManagementModule'
     }
     // {
     //   path: '**',
