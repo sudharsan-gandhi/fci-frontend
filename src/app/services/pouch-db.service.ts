@@ -221,5 +221,17 @@ export class PouchDbService implements OnInit {
                     }
   }
 
+    public validate() {
+      const url = CouchDb + 'api';
+      let val = false;
+      console.log('validating user');
+      this.authHttp.post(url, {} ).subscribe((data) => {
+        val = true;
+      }, (err) => {
+        val = false;
+      });
+      return val;
+    }
+
     // ///////////////////////////////////////end user code//////////////////////////////////////////////
 }
