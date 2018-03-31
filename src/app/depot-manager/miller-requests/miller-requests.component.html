@@ -3,7 +3,10 @@
 <br>
 <br>
 
-
+<div *ngIf="success === 'true'" class='alert alert-success'>
+  Successfully logged in
+</div>
+<br>
 <div class="col-10 center mx-auto" *ngIf="shedPercentage !== undefined && shed !== undefined">
   <mat-progress-bar mode="determinate" color="primary" value="{{shedPercentage}}" class="shed-availability-status  "></mat-progress-bar>
   <span>Allocated : {{ shed.allotedSheds }}</span>
@@ -12,7 +15,7 @@
 
 <br>
 <br>
-
+<div *ngIf = "docs.length === 0" class='alert alert-success'>No new request has been made</div>
 <div *ngFor="let doc of docs">
   <!--Panel-->
   <div class="container col-md-3 float-left">

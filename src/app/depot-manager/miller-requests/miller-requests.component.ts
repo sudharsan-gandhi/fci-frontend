@@ -14,10 +14,15 @@ export class MillerRequestsComponent implements OnInit {
   docs: any[] = new Array();
   shed: any;
   shedPercentage = 0;
+  success: string;
   constructor(private db: PouchDbService) { }
 
   ngOnInit() {
     // this.db.deleteAll();
+    this.success = sessionStorage.getItem('success');
+    setTimeout(() => {
+      this.success = 'false';
+    }, 1500);
     this.db.fetch().then(data => {
       data.rows.forEach(element => {
         console.log('element ', element.doc);

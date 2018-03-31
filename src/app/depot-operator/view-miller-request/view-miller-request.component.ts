@@ -13,10 +13,15 @@ export class ViewMillerRequestComponent implements OnInit {
 
   type: string;
   docs: any[] = new Array();
+  success: string;
   measuredWeightForm: FormGroup;
   constructor(private db: PouchDbService, private logout: LogoutService) { }
 
   ngOnInit() {
+    this.success = sessionStorage.getItem('success');
+    setTimeout(() => {
+      this.success = 'false';
+    }, 1500);
     this.measuredWeightForm = new FormGroup({
       'measuredWeight': new FormControl(null)
     });
