@@ -2,6 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PouchDbService } from './../../services/pouch-db.service';
 import { Component, OnInit } from '@angular/core';
 import { Status } from '../../shared/enums/status.enum';
+import { LogoutService } from '../../services/logout.service';
 
 @Component({
   selector: 'app-view-miller-request',
@@ -13,7 +14,7 @@ export class ViewMillerRequestComponent implements OnInit {
   type: string;
   docs: any[] = new Array();
   measuredWeightForm: FormGroup;
-  constructor(private db: PouchDbService) { }
+  constructor(private db: PouchDbService, private logout: LogoutService) { }
 
   ngOnInit() {
     this.measuredWeightForm = new FormGroup({
@@ -22,6 +23,7 @@ export class ViewMillerRequestComponent implements OnInit {
     this.type = Status.active;
     // this.db.deleteAll();
     this.fetch(this.type);
+    this.db.sync();
   }
 
   fetch(type: string) {
@@ -53,5 +55,8 @@ export class ViewMillerRequestComponent implements OnInit {
     }).catch(err => {
       console.log(' error ', err);
     });
+  }
+  public signout(){
+    this.logout.logout();
   }
 }
