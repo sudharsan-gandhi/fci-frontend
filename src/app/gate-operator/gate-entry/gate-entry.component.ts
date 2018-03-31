@@ -12,10 +12,15 @@ export class GateEntryComponent implements OnInit {
 
   type: string;
   docs: any[] = new Array();
+  success: string;
  constructor(private db: PouchDbService) { }
 
 
   ngOnInit() {
+    this.success = sessionStorage.getItem('success');
+    setTimeout(() => {
+      this.success = 'false';
+    }, 1500);
     this.fetch('all');
   }
   active(doc: any) {

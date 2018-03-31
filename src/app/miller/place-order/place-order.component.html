@@ -2,9 +2,13 @@
 <br>
 <br>
 <br>
+<div *ngIf="success === 'true'" class='alert alert-success'>
+    Successfully logged in
+  </div>
+  <div *ngIf="placeOrderSuccess === true" class='alert alert-success'>
+      Your order has been placed
+    </div>
 <br>
-
-
 <div class="container col-md-6">
   <!-- Card -->
   <div class="card  ">

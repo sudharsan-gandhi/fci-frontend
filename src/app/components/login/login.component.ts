@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
       if (body.token !== undefined || body.token !== '' || body.token !== null) {
         sessionStorage.setItem('token', body.token);
         sessionStorage.setItem('userId', body.data._id);
-        console.log('locastorage-user ', sessionStorage.getItem('userId').toString());
+        sessionStorage.setItem('success', 'true');
+        console.log('locastorage-user ', sessionStorage.getItem('userId').toString() , sessionStorage.getItem('success') );
       }
       this.route.navigateByUrl(body.path);
 

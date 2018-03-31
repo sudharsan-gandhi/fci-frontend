@@ -15,7 +15,10 @@ export class ShedAllotmentComponent implements OnInit {
   shedAllotmentForm: FormGroup;
   shedDetail: any;
   isShedAlloted = false;
-  constructor(private db: PouchDbService) { }
+  ShedSuccess: boolean;
+  constructor(private db: PouchDbService) {
+    this.ShedSuccess = false;
+   }
 
   ngOnInit() {
     // this.db.deleteAll();
@@ -80,6 +83,10 @@ export class ShedAllotmentComponent implements OnInit {
       console.log('doc not exists', doc);
       this.db.push(doc);
     }
+    this.ShedSuccess = true;
+    setTimeout(() => {
+      this.ShedSuccess = false;
+    }, 1500);
 
     // if (value._id === undefined) {
     //   this.db.push(value).then(data => {
