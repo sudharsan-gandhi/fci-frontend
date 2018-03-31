@@ -39,6 +39,9 @@
         <th>
           <b>Set State</b>
         </th>
+        <th>
+          <b>Token</b>
+        </th>
 
 
       </tr>
@@ -72,6 +75,9 @@
             mdbRippleRadius>Active </button>
           <button class="btn btn-success waves-light" *ngIf="doc.status == 'active'" (click)="complete(doc)" mdbRippleRadius>Complete </button>
 
+        </td>
+        <td>
+          <button class="btn btn-success waves-light" routerLink="../token/{{doc._id}}" mdbRippleRadius>Generate Token</button>
         </td>
       </tr>
     </tbody>

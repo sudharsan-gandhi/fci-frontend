@@ -1,3 +1,4 @@
+import { TokenComponent } from './token/token.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GateEntryComponent } from './gate-entry/gate-entry.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: GateEntryComponent
+      },
+      {
+        path: 'token/:millerid',
+        component: TokenComponent
       }
     ]
   }

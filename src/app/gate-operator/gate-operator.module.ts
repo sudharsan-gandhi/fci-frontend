@@ -11,6 +11,7 @@ import { GateOperatorService } from './gate-operator.service';
 import { SharedModule } from '../shared/shared.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { TokenComponent } from './token/token.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     SharedModule,
     MDBBootstrapModule.forRoot()
   ],
-  declarations: [DashboardComponent, GateEntryComponent],
+  declarations: [DashboardComponent, GateEntryComponent, TokenComponent],
   providers: [GateOperatorService],
     schemas: [NO_ERRORS_SCHEMA]
 })

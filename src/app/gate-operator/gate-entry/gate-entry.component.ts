@@ -1,3 +1,4 @@
+import { Type } from './../../shared/enums/type.enum';
 // import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { PouchDbService } from '../../services/pouch-db.service';
@@ -12,7 +13,7 @@ export class GateEntryComponent implements OnInit {
 
   type: string;
   docs: any[] = new Array();
- constructor(private db: PouchDbService) { }
+  constructor(private db: PouchDbService) { }
 
 
   ngOnInit() {
@@ -38,9 +39,9 @@ export class GateEntryComponent implements OnInit {
   fetch(type: string) {
     this.db.fetch().then(data => {
       console.log('docs ', data);
-      data.rows.forEach( doc => {
+      data.rows.forEach(doc => {
         console.log('element ', doc.doc);
-        if ( (doc.doc.status === type) || (type === 'all' && doc.doc.status !== 'submitted')) {
+        if ((doc.doc.status === type) || (type === 'all' && doc.doc.status !== 'submitted') && (doc.doc.type === Type.millerRequest)) {
           this.docs.push(doc.doc);
         }
       });

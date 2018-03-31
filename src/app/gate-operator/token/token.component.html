@@ -1,0 +1,51 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div *ngIf="millerId !== undefined && millerId !== null && doc !== undefined && doc !==null ">
+  <!--Panel-->
+  <div class="card col-10 mx-auto">
+    <h3 class="card-header primary-color white-text">Miller Details</h3>
+    <div class="card-body">
+      <h5 class="card-title">Miller Id -
+        <span>{{ doc._id }}</span>
+      </h5>
+      <h5 class="card-title">Mode of Transport -
+        <span>{{ doc.mode_of_transport }}</span>
+      </h5>
+      <h5 class="card-title">Type of Commodity -
+        <span>{{ doc.type_of_commodity }}</span>
+      </h5>
+      <h5 class="card-title">Total Weight -
+        <span>{{ doc.total_weight }}</span>
+      </h5>
+      <h5 class="card-title">Total Cost -
+        <span>{{ doc.total_cost }}</span>
+      </h5>
+      <h5 class="card-title">Total Bags -
+        <span>{{ doc.total_number_of_bags }}</span>
+      </h5>
+      <h5 class="card-title">Status -
+        <span>{{ doc.status }}</span>
+      </h5>
+
+    </div>
+  </div>
+  <!--/.Panel-->
+</div>
+
+
+  <div *ngIf="datacode!=null">
+    <div class="modal-body">
+      <div class="">
+        <p>data code </p>
+        <qr-code [value]='datacode' [size]="150"></qr-code>
+      </div>
+      <div class="form-group">
+        <p>pass code</p>
+        <qr-code [value]='qrcode' [size]="150"></qr-code>
+      </div>
+    </div>
+  </div>
